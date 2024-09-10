@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class XrayTimingAspect {
+public class XRayTimingAspect {
     private static final AWSXRayRecorder xrayRecorder= AWSXRay.getGlobalRecorder();
     @Around("@annotation(XRayTimed)")
     private Object timeXRaySegment(ProceedingJoinPoint joinPoint) throws Throwable{
         MethodSignature signature= (MethodSignature) joinPoint.getSignature();
-        XrayTImed xRayTimed = signature.getMethod().getAnnotation(XrayTImed.class);
+        XRayTimed xRayTimed = signature.getMethod().getAnnotation(XRayTimed.class);
         String segmentName = xRayTimed.segmentName().isEmpty() ? signature.getMethod().getName() : xRayTimed.segmentName();
         Segment segment = (Segment) xrayRecorder.beginSegment(segmentName);
         try {

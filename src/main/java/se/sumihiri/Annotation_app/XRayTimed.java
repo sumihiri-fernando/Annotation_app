@@ -1,5 +1,5 @@
 package se.sumihiri.Annotation_app;
 
-public @interface  XrayTImed {
+public @interface XRayTimed {
     String segmentName() default "";
 }
